@@ -1,2 +1,2 @@
 # Sri-Lanka-BarberShop
-aa
+App mobile em Kotlin consumindo uma API própria feita com o frameWork Spring Boot.
