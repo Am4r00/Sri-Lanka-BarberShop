@@ -88,7 +88,7 @@ public class AuthController {
         usuarioRepository.save(usuario);
         return ResponseEntity.ok("Usuário registrado com sucesso!");
     }
-    @PostMapping("/criar-usuario")
+    @PostMapping("/criar-barbeiro")
     @PreAuthorize("hasAuthority('BARBEIRO_ADMIN')")
     public ResponseEntity<String> criarUsuario(@RequestBody AuthRequest request, Authentication authentication) {
         Usuario criador = usuarioRepository.findByEmail(authentication.getName())
