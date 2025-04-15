@@ -21,9 +21,7 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
-    }
+
 
     public Optional<Usuario> buscarPorId(Long id) {
         return usuarioRepository.findById(id);
@@ -34,7 +32,5 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public void deletarUsuario(Long id) {
-        usuarioRepository.deleteById(id);
-    }
+
 }

@@ -120,15 +120,20 @@ public class AuthController {
         }
 
         Usuario usuario = usuarioOpt.get();
-        String codigo = String.valueOf(new Random().nextInt(900000) + 100000); // Gera código de 6 dígitos
+        String codigo = String.valueOf(new Random().nextInt(900000) + 100000);
 
         usuario.setCodigoRecuperacao(codigo);
         usuario.setCodigoExpiracao(LocalDateTime.now().plusMinutes(15));
         usuarioRepository.save(usuario);
 
-        emailService.enviarEmail(usuario.getEmail(), "Recuperação de Senha",
-                "Seu código de recuperação é: " + codigo);
-
+        try {
+            emailService.enviarEmail(usuario.getEmail(), "Recuperação de Senha",
+                    "Seu código de recuperação é: " + codigo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao enviar e-mail: " + e.getMessage());
+        }
         return ResponseEntity.ok("Código enviado para seu e-mail.");
     }
 

@@ -2,8 +2,10 @@ package com.SriLanka.BarberShop.config;
 
 import com.SriLanka.BarberShop.services.CustomUserDetailsService;
 import com.SriLanka.BarberShop.services.JwtService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,12 +26,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-
     private static final List<String> PUBLIC_ENDPOINTS = List.of(
             "/auth/login",
             "/auth/registrar",
             "/auth/recuperar-senha",
-            "/auth/redefinir-senha"
+            "/auth/redefinir-senha",
+            "/error"
     );
 
     @Override
@@ -38,7 +40,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String path = request.getServletPath();
-        if (PUBLIC_ENDPOINTS.contains(path)) {
+        System.out.println("Interceptando caminho: " + path);
+
+        boolean isPublic = PUBLIC_ENDPOINTS.stream().anyMatch(path::equalsIgnoreCase);
+        if (isPublic) {
             filterChain.doFilter(request, response);
             return;
         }
