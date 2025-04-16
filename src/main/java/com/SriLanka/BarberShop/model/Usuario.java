@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -29,4 +31,14 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private TipoUsuario tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "criado_por_id")
+    private Usuario criadoPor;
+
+    @Column(name = "codigo_recuperacao", length = 10)
+    private String codigoRecuperacao;
+
+    @Column(name = "codigo_expiracao")
+    private LocalDateTime codigoExpiracao;
 }

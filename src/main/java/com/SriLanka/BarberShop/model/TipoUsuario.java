@@ -1,5 +1,5 @@
 package com.SriLanka.BarberShop.model;
 
 public enum TipoUsuario {
-    CLIENTE, BARBEIRO
+    CLIENTE, BARBEIRO, BARBEIRO_ADMIN
 }

@@ -3,9 +3,12 @@ package com.SriLanka.BarberShop.repository;
 import com.SriLanka.BarberShop.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByEmail(String email);
+    List<Usuario> findByCriadoPor(Usuario criadoPor);
 }
