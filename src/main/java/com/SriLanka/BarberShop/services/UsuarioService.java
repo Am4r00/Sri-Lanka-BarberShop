@@ -4,7 +4,6 @@ import com.SriLanka.BarberShop.model.Usuario;
 import com.SriLanka.BarberShop.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
