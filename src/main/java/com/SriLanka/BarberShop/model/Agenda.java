@@ -23,9 +23,4 @@ public class Agenda {
     @ManyToOne
     private Servico servico;
 
-    @ManyToOne
-    private Estabelecimento estabelecimento;
-
-    private String observacoes;
-
 }

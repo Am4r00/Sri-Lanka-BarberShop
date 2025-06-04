@@ -11,8 +11,6 @@ import java.util.List;
 
 public interface AgendaRepository extends JpaRepository<Agenda, Long> {
 
-    List<Agenda> findByEstabelecimentoIdAndDataHoraBetween(Long estabelecimentoId, LocalDateTime inicio, LocalDateTime fim);
-
     List<Agenda> findByClienteId(Long id);
 
     @Query("SELECT a FROM Agenda a WHERE DATE(a.dataHora) = :data")

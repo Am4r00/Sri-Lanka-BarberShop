@@ -24,8 +24,6 @@ public class AgendamentoService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private ServicoRepository servicoRepository;
-    @Autowired
-    private EstabelecimentoRepository estabelecimentoRepository;
 
     @Autowired
     private  EmailService emailService;
@@ -34,14 +32,11 @@ public class AgendamentoService {
 
         Usuario cliente = usuarioRepository.findById(request.getClienteId()).orElseThrow();
         Servico servico = servicoRepository.findById(request.getServicoId()).orElseThrow();
-        Estabelecimento estabelecimento = estabelecimentoRepository.findById(request.getEstabelecimentoId()).orElseThrow();
 
         Agenda agenda = new Agenda();
         agenda.setCliente(cliente);
         agenda.setServico(servico);
-        agenda.setEstabelecimento(estabelecimento);
         agenda.setDataHora(request.getDataHora());
-        agenda.setObservacoes(request.getObservacoes());
 
         enviarEmailBarbeiro(agenda);
         enviarEmailCliente(agenda);
@@ -62,7 +57,7 @@ public class AgendamentoService {
     }
 
     public String enviarEmailCliente(Agenda agenda){
-        String endereco = formatarEndereco(agenda.getEstabelecimento());
+        String endereco = "Av.Eng.Eusébio Stevaux";
 
         String emailCliente = String.format(
             "Olá %s, seu corte foi marcado!\n\nLocal: %s\nBarbeiro: %s\nData e Hora : %s",
@@ -84,11 +79,11 @@ public class AgendamentoService {
         return agendaRepository.findById(id);
     }
 
-    public String formatarEndereco(Estabelecimento barbearia){
-        return String.format("%s, %s - %s, %s - %s, %s - %s",
-        barbearia.getRua(),barbearia.getNumero(),
-        barbearia.getComplemento() != null ? barbearia.getComplemento() : " ",
-        barbearia.getBairro(), barbearia.getCidade(), barbearia.getEstado(), barbearia.getCep());
-    }
+//    public String formatarEndereco(Estabelecimento barbearia){
+//        return String.format("%s, %s - %s, %s - %s, %s - %s",
+//        barbearia.getRua(),barbearia.getNumero(),
+//        barbearia.getComplemento() != null ? barbearia.getComplemento() : " ",
+//        barbearia.getBairro(), barbearia.getCidade(), barbearia.getEstado(), barbearia.getCep());
+//    }
 
 }

@@ -12,7 +12,5 @@ public class AgendamentoRequest {
 
     private Long clienteId;
     private Long servicoId;
-    private Long estabelecimentoId;
     private LocalDateTime dataHora;
-    private String observacoes;
 }
